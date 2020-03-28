@@ -43,7 +43,7 @@ dependencies {
 def querydslSrcDir = 'src/main/generated'
 
 querydsl {
-    library = "com.querydsl:querydsl-apt"
+    library = "com.querydsl:querydsl-apt:4.2.1"
     jpa = true
     querydslSourcesDir = querydslSrcDir
 }
