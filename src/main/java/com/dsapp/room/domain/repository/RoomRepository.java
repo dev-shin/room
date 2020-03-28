@@ -21,7 +21,10 @@ public interface RoomRepository extends PagingAndSortingRepository<Room, Long>,
                             .and(root.isDeleted.isNull().or(root.isDeleted.eq(false)))
                             .and(root.photos.length().gt(10));
                 }else if(value.equals("Duplex")) {
-                    return root.buildingFloor.trim().eq("2").or(root.buildingFloor.trim().eq("3")).or(root.buildingFloor.trim().eq("-"))
+                    return root.buildingFloor.trim().eq("2")
+                            .or(root.buildingFloor.trim().eq("3"))
+                            .or(root.buildingFloor.trim().eq("4"))
+                            .or(root.buildingFloor.trim().eq("-"))
                             .and(root.memo.contains("복층").or(root.title.contains("복층")).or(root.title.contains("전원주택").or(root.memo.contains("전원주택")))
                                     .or(root.title.contains("땅콩")).or(root.memo.contains("땅콩")).or(root.title.contains("협소주택")).or(root.memo.contains("협소주택"))
                                     .or(root.title.contains("타운하우스")).or(root.memo.contains("타운하우스"))

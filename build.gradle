@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.dsapp'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -14,7 +14,7 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
-
+compileQuerydsl
 repositories {
     jcenter{url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'}
     mavenCentral()
@@ -43,7 +43,7 @@ dependencies {
 def querydslSrcDir = 'src/main/generated'
 
 querydsl {
-    library = "com.querydsl:querydsl-apt:4.2.1"
+    library = "com.querydsl:querydsl-apt"
     jpa = true
     querydslSourcesDir = querydslSrcDir
 }
@@ -62,6 +62,10 @@ compileQuerydsl{
 
 configurations {
     querydsl.extendsFrom compileClasspath
+}
+
+clean {
+    delete file(querydslSrcDir)
 }
 
 test {
