@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: set1
   jpa:
     show-sql: true
     generate-ddl: true
