@@ -12,4 +12,8 @@ spring:
   data:
     rest:
       base-path: /api
-
+  datasource:
+    url: jdbc:mariadb://database-room.chjt3rqqlxpp.ap-northeast-2.rds.amazonaws.com:3306/room
+    username: admin
+    password: voxldj1633
+    driver-class-name: org.mariadb.jdbc.Driver
