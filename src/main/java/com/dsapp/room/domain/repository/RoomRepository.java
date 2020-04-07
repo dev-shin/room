@@ -19,7 +19,8 @@ public interface RoomRepository extends PagingAndSortingRepository<Room, Long>,
                     return root.roomFloor.trim().eq("1")
                             .and(root.buildingFloor.trim().eq("1"))
                             .and(root.isDeleted.isNull().or(root.isDeleted.eq(false)))
-                            .and(root.photos.length().gt(10));
+                            //.and(root.photos.length().gt(10))
+                            ;
                 }else if(value.equals("Duplex")) {
                     return root.buildingFloor.trim().eq("2")
                             .or(root.buildingFloor.trim().eq("3"))
