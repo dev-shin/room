@@ -30,7 +30,7 @@ public interface RoomRepository extends PagingAndSortingRepository<Room, Long>,
                                     .or(root.title.contains("타운하우스")).or(root.memo.contains("타운하우스"))
                             )
 
-                            //.and(root.address.contains("서울").or(root.address.contains("수원")).or(root.address.contains("용인")).or(root.address.contains("성남")))
+                            .and(root.address.contains("서울").or(root.address.contains("수원")).or(root.address.contains("용인")).or(root.address.contains("성남")).or(root.address.contains("광주")))
                             .and(root.isDeleted.isNull().or(root.isDeleted.eq(false)))
                             //.and(root.photos.length().gt(10))
                             ;
