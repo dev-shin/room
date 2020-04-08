@@ -20,6 +20,7 @@ public interface RoomRepository extends PagingAndSortingRepository<Room, Long>,
                             .and(root.buildingFloor.trim().eq("1"))
                             .and(root.isDeleted.isNull().or(root.isDeleted.eq(false)))
                             .or(root.address.contains("건물전체"))
+                            .or(root.address.contains("건물 전체"))
                             //.and(root.photos.length().gt(10))
                             ;
                 }else if(value.equals("Duplex")) {
