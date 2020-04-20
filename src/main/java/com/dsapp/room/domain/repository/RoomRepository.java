@@ -19,14 +19,14 @@ public interface RoomRepository extends PagingAndSortingRepository<Room, Long>,
                     return root.roomFloor.trim().eq("1")
                             .and(root.buildingFloor.trim().eq("1"))
                             .and(root.isDeleted.isNull().or(root.isDeleted.eq(false)))
-                            .or(root.address.contains("건물전체"))
-                            .or(root.address.contains("건물 전체"))
+                            .or(root.address.contains("건물전체").and(root.isDeleted.isNull().or(root.isDeleted.eq(false))))
+                            .or(root.address.contains("건물 전체").and(root.isDeleted.isNull().or(root.isDeleted.eq(false))))
                             //.and(root.photos.length().gt(10))
                             ;
                 }else if(value.equals("Duplex")) {
                     return root.buildingFloor.trim().eq("2")
                             .or(root.buildingFloor.trim().eq("3"))
-                            .or(root.buildingFloor.trim().eq("4"))
+                            //.or(root.buildingFloor.trim().eq("4"))
                             .or(root.buildingFloor.trim().eq("-"))
                             .and(root.memo.contains("복층").or(root.title.contains("복층")).or(root.title.contains("전원주택").or(root.memo.contains("전원주택")))
                                     .or(root.title.contains("땅콩")).or(root.memo.contains("땅콩")).or(root.title.contains("협소주택")).or(root.memo.contains("협소주택"))
