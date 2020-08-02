@@ -21,7 +21,7 @@ public interface RoomRepository extends PagingAndSortingRepository<Room, Long>,
                             .and(root.isDeleted.isNull().or(root.isDeleted.eq(false)))
                             .or(root.address.contains("건물전체").and(root.isDeleted.isNull().or(root.isDeleted.eq(false))))
                             .or(root.address.contains("건물 전체").and(root.isDeleted.isNull().or(root.isDeleted.eq(false))))
-                            //.and(root.photos.length().gt(10))
+                            .and(root.photos.length().gt(10))
                             ;
                 }else if(value.equals("Duplex")) {
                     return root.buildingFloor.trim().eq("2")
@@ -35,7 +35,7 @@ public interface RoomRepository extends PagingAndSortingRepository<Room, Long>,
 
                             .and(root.address.contains("서울").or(root.address.contains("수원")).or(root.address.contains("용인")).or(root.address.contains("성남")).or(root.address.contains("광주")))
                             .and(root.isDeleted.isNull().or(root.isDeleted.eq(false)))
-                            //.and(root.photos.length().gt(10))
+                            .and(root.photos.length().gt(10))
                             ;
                 }else if(value.equals("Favorite")){
                     return root.isFavorite.eq(true).and(root.isDeleted.isNull().or(root.isDeleted.eq(false)));
