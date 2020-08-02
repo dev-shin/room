@@ -9,19 +9,14 @@ group = 'com.dsapp'
 version = '0.0.4-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-compileQuerydsl
 repositories {
-    jcenter{url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/'}
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -32,55 +27,28 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 
+    implementation "io.springfox:springfox-boot-starter:3.0.0"
+
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
 
-    implementation 'io.springfox:springfox-swagger2:3.0.0-SNAPSHOT'
-    implementation 'io.springfox:springfox-swagger-ui:3.0.0-SNAPSHOT'
-    implementation 'io.springfox:springfox-data-rest:3.0.0-SNAPSHOT'
-
-    compile("com.querydsl:querydsl-jpa")
-    compile("com.querydsl:querydsl-apt")
-
-    // (Required) Writing and executing Unit Tests on the JUnit Platform
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.2"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.5.2"
-
-    // (Optional) If you need "Parameterized Tests"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.5.2"
+    implementation 'com.querydsl:querydsl-jpa'
 }
 
-def querydslSrcDir = 'src/main/generated'
+def querydslDir = "$buildDir/generated"
 
 querydsl {
-    library = "com.querydsl:querydsl-apt"
     jpa = true
-    querydslSourcesDir = querydslSrcDir
+    querydslSourcesDir = querydslDir
 }
 
 sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java', querydslSrcDir]
-        }
-    }
-}
-
-compileQuerydsl{
-    options.annotationProcessorPath = configurations.querydsl
+    main.java.srcDir querydslDir
 }
 
 configurations {
     querydsl.extendsFrom compileClasspath
 }
 
-clean {
-    delete file(querydslSrcDir)
-}
-
-test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-        exceptionFormat "full"
-    }
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
 }
